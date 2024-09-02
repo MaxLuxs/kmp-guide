@@ -1,0 +1,51 @@
+{
+  "title": "Создание проекта на Kotlin Multiplatform (KMP)",
+  "introduction": "Kotlin Multiplatform (KMP) позволяет разрабатывать приложения для различных платформ, таких как Android, iOS, веб и настольные системы, используя общий код. Это значительно упрощает процесс разработки и уменьшает количество дублирующегося кода. В этой статье мы рассмотрим основные шаги по созданию KMP проекта.",
+  "steps": [
+    {
+      "step": 1,
+      "title": "",
+      "description": "",
+      "imageUri": "compose-multiplatform.xml"
+    },
+    {
+      "step": 2,
+      "title": "Установка и настройка среды разработки",
+      "description": "Для начала вам потребуется установить последнюю версию IntelliJ IDEA или Android Studio. Эти IDE поддерживают разработку на Kotlin и имеют необходимые плагины для работы с KMP."
+    },
+    {
+      "step": 3,
+      "title": "Создание нового проекта",
+      "description": "1. Откройте IntelliJ IDEA или Android Studio.\n2. Выберите New Project.\n3. В списке шаблонов выберите Kotlin Multiplatform.\n4. Укажите имя проекта, его расположение и целевые платформы (например, Android и iOS)."
+    },
+    {
+      "step": 4,
+      "title": "Структура проекта",
+      "description": "После создания проекта вы увидите следующую структуру:\n- commonMain: Общий код для всех платформ.\n- androidMain: Код, специфичный для Android.\n- iosMain: Код, специфичный для iOS."
+    },
+    {
+      "step": 5,
+      "title": "Написание общего кода",
+      "description": "В директории commonMain вы можете писать код, который будет использоваться на всех платформах. Например, создание классов, функций и логики, которые не зависят от конкретной платформы.",
+      "code": "```kotlin\n// commonMain/src/commonMain/kotlin/com/example/Greeting.kt\npackage com.example\n\nclass Greeting {\n    fun greet(): String {\n        return \"Hello, Kotlin Multiplatform!\"\n    }\n}\n```"
+    },
+    {
+      "step": 6,
+      "title": "Платформозависимый код",
+      "description": "Иногда вам потребуется написать код, который зависит от конкретной платформы. Для этого используйте директории androidMain и iosMain.",
+      "code": "```kotlin\n// androidMain/src/androidMain/kotlin/com/example/Platform.kt\npackage com.example\n\nactual class Platform actual constructor() {\n    actual val platform: String = \"Android\"\n}\n\n// iosMain/src/iosMain/kotlin/com/example/Platform.kt\npackage com.example\n\nactual class Platform actual constructor() {\n    actual val platform: String = \"iOS\"\n}\n```"
+    },
+    {
+      "step": 7,
+      "title": "Настройка зависимостей",
+      "description": "В файле build.gradle.kts добавьте необходимые зависимости для каждой платформы.",
+      "code": "```kotlin\nkotlin {\n    android()\n    ios()\n\n    sourceSets {\n        val commonMain by getting {\n            dependencies {\n                implementation(\"org.jetbrains.kotlin:kotlin-stdlib-common\")\n            }\n        }\n        val androidMain by getting {\n            dependencies {\n                implementation(\"org.jetbrains.kotlin:kotlin-stdlib\")\n            }\n        }\n        val iosMain by getting {\n            dependencies {\n                implementation(\"org.jetbrains.kotlin:kotlin-stdlib\")\n            }\n        }\n    }\n}\n```"
+    },
+    {
+      "step": 8,
+      "title": "Сборка и запуск проекта",
+      "description": "После написания кода и настройки зависимостей, вы можете собрать и запустить проект. Для Android используйте стандартные инструменты сборки Gradle, а для iOS - Xcode."
+    }
+  ],
+  "conclusion": "Создание проекта на Kotlin Multiplatform позволяет значительно упростить разработку и поддержание кода для различных платформ. Надеюсь, эта статья поможет вам начать работу с KMP!"
+}

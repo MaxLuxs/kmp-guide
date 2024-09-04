@@ -16,4 +16,13 @@ class GuideDataSource {
             Result.failure(exception)
         }
     }
+
+    @OptIn(ExperimentalResourceApi::class)
+    suspend fun getImageByName(name: String): Result<ByteArray> {
+        return try {
+            Result.success(Res.readBytes("files/images/$name"))
+        } catch (exception: Exception) {
+            Result.failure(exception)
+        }
+    }
 }

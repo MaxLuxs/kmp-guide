@@ -1,7 +1,7 @@
 package io.maxluxs.kmp_guide.features.guide.domain
 
 class GetGuideByPathUseCase(
-    private val guideRepository: GuideRepository
+    private val guideRepository: GuideRepositoryProtocol
 ) {
     suspend operator fun invoke(path: String): Result<Guide> {
         return guideRepository.getGuideByPath(path)

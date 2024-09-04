@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Guide(
+    val banner: String? = null,
     val title: String? = null,
     val introduction: String? = null,
     val steps: List<Step> = emptyList(),

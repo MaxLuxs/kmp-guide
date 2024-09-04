@@ -4,18 +4,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.maxluxs.kmp_guide.common.UiState
 import io.maxluxs.kmp_guide.features.guide.domain.GetGuideByPathUseCase
-import io.maxluxs.kmp_guide.features.guide.domain.Guide
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
- class GuideViewModel(
-    private val getGuideByPathUseCase: GetGuideByPathUseCase
+class GuideViewModel(
+    private val getGuideByPathUseCase: GetGuideByPathUseCase,
+    private val guideUiStateMapper: GuideUiStateMapper,
 ): ViewModel() {
 
      sealed interface Event {
@@ -24,32 +21,34 @@ import kotlinx.coroutines.withContext
          data object OnAuthorClicked: Event
      }
 
-     private val _uiState = MutableStateFlow<UiState<Guide>>(emptyState())
-     val uiState: StateFlow<UiState<Guide>> = _uiState
-
-     private val singleEventsChannel = Channel<Event>(Channel.BUFFERED)
-     val singleEvents: Flow<Event>
-         get() = singleEventsChannel.receiveAsFlow()
+     private val _uiState = MutableStateFlow<UiState<GuideScreenUiState>>(emptyState())
+     val uiState: StateFlow<UiState<GuideScreenUiState>> = _uiState
 
      fun initGuide(pathToGuide: String) {
         viewModelScope.launch(Dispatchers.Default) {
             _uiState.emit(UiState.Loading())
-            val result = getGuideByPathUseCase(pathToGuide)
-            withContext(Dispatchers.Main) {
-                result.fold(
-                    onSuccess = { _uiState.emit(UiState.Success(it)) },
-                    onFailure = {  _uiState.emit(UiState.Failed(it)) }
-                )
-            }
+            getGuideByPathUseCase(pathToGuide).fold(
+                onSuccess = {
+                    val uiState = guideUiStateMapper(it)
+                    withContext(Dispatchers.Main) {
+                        _uiState.emit(UiState.Success(uiState))
+                    }
+                },
+                onFailure = {
+                    withContext(Dispatchers.Main) {
+                        _uiState.emit(UiState.Failed(it))
+                    }
+                }
+            )
         }
     }
 
      fun onEvent(event: Event) {
          viewModelScope.launch {
-             singleEventsChannel.send(event)
+
          }
      }
 
-    private fun emptyState() = UiState.Loading<Guide>()
+    private fun emptyState() = UiState.Loading<GuideScreenUiState>()
 
 }

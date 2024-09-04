@@ -1,12 +1,13 @@
 {
+  "banner": "how_start_kmp_banner.jpeg",
   "title": "Создание проекта на Kotlin Multiplatform (KMP)",
   "introduction": "Kotlin Multiplatform (KMP) позволяет разрабатывать приложения для различных платформ, таких как Android, iOS, веб и настольные системы, используя общий код. Это значительно упрощает процесс разработки и уменьшает количество дублирующегося кода. В этой статье мы рассмотрим основные шаги по созданию KMP проекта.",
   "steps": [
     {
       "step": 1,
-      "title": "",
-      "description": "",
-      "imageUri": "compose-multiplatform.xml"
+      "title": "Заголовок",
+      "description": "Описание",
+      "imageUri": "how_start_kmp_image.jpeg"
     },
     {
       "step": 2,

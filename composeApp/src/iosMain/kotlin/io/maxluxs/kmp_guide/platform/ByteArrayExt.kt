@@ -12,5 +12,5 @@ import platform.Foundation.create
 actual fun ByteArray.toImageBitmap(): ImageBitmap {
     val nsData = NSData.create(bytes = this, length = this.size.toULong())
     val uiImage = UIImage(data = nsData)
-    return uiImage!!.toComposeImageBitmap()
+    return uiImage.toComposeImageBitmap()
 }

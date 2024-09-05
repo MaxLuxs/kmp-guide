@@ -1,4 +1,4 @@
-package io.maxluxs.kmp_guide.features.guide.presentation.components
+package io.maxluxs.kmp_guide.features.guide.presentation.components.step
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Card
@@ -11,7 +11,7 @@ import io.maxluxs.kmp_guide.features.code_presenter.presentation.CodeReader
 @Composable
 fun GuideScreenStepCode(code: CodePresentation) {
     Card(
-        modifier = Modifier.padding(16.dp),
+        modifier = Modifier.padding(vertical = 8.dp),
         elevation = 0.dp
     ) {
         CodeReader(code)

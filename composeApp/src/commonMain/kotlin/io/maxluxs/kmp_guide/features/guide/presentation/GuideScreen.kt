@@ -11,9 +11,9 @@ import androidx.compose.ui.unit.dp
 import io.maxluxs.kmp_guide.common.AppTheme
 import io.maxluxs.kmp_guide.common.UiState
 import io.maxluxs.kmp_guide.common.WindowSize
-import io.maxluxs.kmp_guide.features.guide.presentation.components.GuidScreenError
-import io.maxluxs.kmp_guide.features.guide.presentation.components.GuidScreenProgress
-import io.maxluxs.kmp_guide.features.guide.presentation.components.GuidScreenSuccess
+import io.maxluxs.kmp_guide.features.guide.presentation.components.step.GuideScreenError
+import io.maxluxs.kmp_guide.features.guide.presentation.components.step.GuideScreenProgress
+import io.maxluxs.kmp_guide.features.guide.presentation.components.step.GuideScreenSuccess
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -24,8 +24,8 @@ fun GuideScreen(pathToGuide: String) {
         modifier = Modifier.padding(
             horizontal = when (AppTheme.windowSize) {
                 WindowSize.COMPACT -> 16.dp
-                WindowSize.MEDIUM -> 100.dp
-                WindowSize.EXPANDED -> 200.dp
+                WindowSize.MEDIUM -> 124.dp
+                WindowSize.EXPANDED -> 264.dp
             }
         )
     ) {
@@ -39,9 +39,9 @@ private fun GuideScreenView(pathToGuide: String) {
     val state by viewModel.uiState.collectAsState()
 
     when(state) {
-        is UiState.Loading -> GuidScreenProgress(state as UiState.Loading)
-        is UiState.Success -> GuidScreenSuccess(state as UiState.Success<GuideScreenUiState>)
-        is UiState.Failed -> GuidScreenError(state as UiState.Failed)
+        is UiState.Loading -> GuideScreenProgress(state as UiState.Loading)
+        is UiState.Success -> GuideScreenSuccess(state as UiState.Success<GuideScreenUiState>)
+        is UiState.Failed -> GuideScreenError(state as UiState.Failed)
     }
 
     LaunchedEffect(Unit) { viewModel.initGuide(pathToGuide) }

@@ -11,9 +11,10 @@ class GuideUiStateMapper(
 ) {
 
     suspend operator fun invoke(guide: Guide): GuideScreenUiState {
-        val bannerBytes = guideDataSource.getImageByName( guide.banner ?: DEFAULT_BANNER).getOrNull()
+        val bannerBytes = guideDataSource.getImageByName(guide.banner ?: DEFAULT_BANNER)
+            .getOrNull() ?: error("banner not found")
         return GuideScreenUiState(
-            banner = bannerBytes!!,
+            banner = bannerBytes,
             title = guide.title ?: "",
             introduction = guide.introduction ?: "",
             steps = mapSteps(guide.steps),
@@ -22,10 +23,10 @@ class GuideUiStateMapper(
     }
 
     private suspend fun mapSteps(steps: List<Step>): List<StepUiState> {
-        return steps.mapNotNull { mapStep(it) }
+        return steps.map { mapStep(it) }
     }
 
-    private suspend fun mapStep(step: Step): StepUiState? {
+    private suspend fun mapStep(step: Step): StepUiState {
         val imageBytes = step.imageUri?.let {
             guideDataSource.getImageByName(it).getOrNull()
         }
@@ -36,12 +37,14 @@ class GuideUiStateMapper(
                 description = step.description ?: "",
                 code = codePresentationMapper(step.code)
             )
+
             imageBytes != null -> StepUiState.WithImage(
                 step = step.step,
                 title = step.title ?: "",
                 description = step.description ?: "",
                 image = imageBytes
             )
+
             else -> StepUiState.Simple(
                 step = step.step,
                 title = step.title ?: "",

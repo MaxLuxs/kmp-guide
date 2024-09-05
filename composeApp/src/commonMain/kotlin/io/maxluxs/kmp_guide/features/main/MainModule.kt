@@ -5,7 +5,7 @@ import io.maxluxs.kmp_guide.features.code_presenter.domain.CodePresentationMappe
 import io.maxluxs.kmp_guide.features.guide.domain.GetGuideByPathUseCase
 import io.maxluxs.kmp_guide.features.guide.domain.GuideRepositoryProtocol
 import io.maxluxs.kmp_guide.features.guide.gateway.GuideRepository
-import io.maxluxs.kmp_guide.features.guide.presentation.GuideUiStateMapper
+import io.maxluxs.kmp_guide.features.guide.presentation.state.GuideUiStateMapper
 import io.maxluxs.kmp_guide.features.guide.presentation.GuideViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module

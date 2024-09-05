@@ -1,4 +1,4 @@
-package io.maxluxs.kmp_guide.features.guide.presentation
+package io.maxluxs.kmp_guide.features.guide.presentation.state
 
 import androidx.compose.runtime.Immutable
 import io.maxluxs.kmp_guide.features.code_presenter.presentation.CodePresentation

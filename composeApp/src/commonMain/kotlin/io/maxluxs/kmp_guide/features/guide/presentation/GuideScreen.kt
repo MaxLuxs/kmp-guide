@@ -1,7 +1,7 @@
 package io.maxluxs.kmp_guide.features.guide.presentation
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Surface
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -14,6 +14,7 @@ import io.maxluxs.kmp_guide.common.WindowSize
 import io.maxluxs.kmp_guide.features.guide.presentation.components.step.GuideScreenError
 import io.maxluxs.kmp_guide.features.guide.presentation.components.step.GuideScreenProgress
 import io.maxluxs.kmp_guide.features.guide.presentation.components.step.GuideScreenSuccess
+import io.maxluxs.kmp_guide.features.guide.presentation.state.GuideScreenUiState
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -38,7 +39,7 @@ private fun GuideScreenView(pathToGuide: String) {
     val viewModel: GuideViewModel = koinViewModel()
     val state by viewModel.uiState.collectAsState()
 
-    when(state) {
+    when (state) {
         is UiState.Loading -> GuideScreenProgress(state as UiState.Loading)
         is UiState.Success -> GuideScreenSuccess(state as UiState.Success<GuideScreenUiState>)
         is UiState.Failed -> GuideScreenError(state as UiState.Failed)

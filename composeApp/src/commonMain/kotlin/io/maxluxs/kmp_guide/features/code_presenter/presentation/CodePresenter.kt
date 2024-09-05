@@ -1,21 +1,14 @@
 package io.maxluxs.kmp_guide.features.code_presenter.presentation
 
 import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.selection.DisableSelection
 import androidx.compose.foundation.text.selection.SelectionContainer
-import androidx.compose.material.LocalContentColor
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.key
 import androidx.compose.runtime.remember
@@ -38,11 +31,11 @@ val fontSize = 13.sp
 
 @Composable
 fun CodeReader(model: CodePresentation) = key(model) {
-    with (LocalDensity.current) {
+    with(LocalDensity.current) {
         SelectionContainer {
             Surface(
                 Modifier.wrapContentHeight().fillMaxWidth(),
-                color = MaterialTheme.colors.background,
+                color = MaterialTheme.colorScheme.background,
             ) {
                 Lines(model.lines)
             }

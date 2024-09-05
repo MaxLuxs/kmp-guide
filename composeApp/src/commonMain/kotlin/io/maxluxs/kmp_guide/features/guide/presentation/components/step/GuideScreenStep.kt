@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import io.maxluxs.kmp_guide.features.guide.presentation.StepUiState
+import io.maxluxs.kmp_guide.features.guide.presentation.state.StepUiState
 
 @Composable
 fun GuideScreenStep(step: StepUiState) {

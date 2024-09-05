@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.maxluxs.kmp_guide.common.UiState
 import io.maxluxs.kmp_guide.features.guide.domain.GetGuideByPathUseCase
+import io.maxluxs.kmp_guide.features.guide.presentation.state.GuideScreenUiState
+import io.maxluxs.kmp_guide.features.guide.presentation.state.GuideUiStateMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

@@ -1,6 +1,5 @@
 @file:OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
 
-import org.gradle.kotlin.dsl.implementation
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -53,12 +52,10 @@ kotlin {
     
     sourceSets {
         val desktopMain by getting
-        val wasmJsMain by getting
-        
+
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
-            implementation("androidx.compose.ui:ui:1.7.0")
         }
         commonMain.dependencies {
             implementation(projects.shared)
@@ -78,7 +75,6 @@ kotlin {
             implementation(libs.koin.compose.viewmodel)
         }
         iosMain.dependencies {
-            implementation("org.jetbrains.compose.ui:ui:1.6.11")
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
@@ -86,7 +82,6 @@ kotlin {
 
         }
         wasmJsMain.dependencies {
-            implementation("org.jetbrains.skiko:skiko-wasm-js:0.8.11")
         }
     }
 }
